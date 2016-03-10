@@ -42,9 +42,8 @@ if __name__ == "__main__":
                    """)
     connDB.commit()
 
-
     url = "https://api.jcdecaux.com/vls/v1/stations?contract=Dublin&apiKey=a85c8f0702b254af2e0bddaf3a12603cf19579e4"
-    weekSecs = 1800         #604800
+    weekSecs = 604800
     count = 1
 
     while weekSecs > 0:
@@ -59,15 +58,8 @@ if __name__ == "__main__":
         weekSecs -= 300
         sleep(300)
 
-
-    # for row in cursor.execute('SELECT * FROM projectRothar_DB;'):
-    #     print(row)
-
     df = pd.read_sql_query("SELECT * from projectRothar_DB", connDB)
     # print(df.head())
     dfCSV = df.to_csv('ProjectRotharDatabase.csv')
 
-
     connDB.close()
-
-#terminal: sqlite3 /Users/andrewpoole/PycharmProjects/andyp/projectRothar_DB.db
