@@ -43,19 +43,16 @@ if __name__ == "__main__":
     connDB.commit()
 
     url = "https://api.jcdecaux.com/vls/v1/stations?contract=Dublin&apiKey=a85c8f0702b254af2e0bddaf3a12603cf19579e4"
-    weekSecs = 604800
-    count = 1
+    count = 2016 #number of 5 min intervals in a week
 
-    while weekSecs > 0:
+    while count > 0:
         df = dataframe(DBStationInfo(url))
 
         df.to_sql(name="projectRothar_DB", con=connDB, flavor="sqlite", if_exists="append", index=False)
         connDB.commit()
 
         print (count)
-        count += 1
-
-        weekSecs -= 300
+        count -= 1
         sleep(300)
 
     df = pd.read_sql_query("SELECT * from projectRothar_DB", connDB)
