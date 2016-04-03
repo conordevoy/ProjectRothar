@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>OpenWeatherMaps Assign 2</title>   
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+<style type="text/css">
+    html { 
+        height: 100% 
+    }
+    body { 
+        height: 100%; 
+        margin: 0; 
+        padding: 0 
+    }
+    #map_canvas { 
+        height: 100% 
+    }
+</style>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDXQuaYcAVKzoIa4iYOxh8hTjjR3vmiSYY"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>    
+</head>
+<body>
+<div id="map_canvas" style="width:100%; height:100%"></div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        //create map
+        var mapDiv = document.getElementById("map_canvas");
+        var mapOptions = {
+            center: new google.maps.LatLng(53.347158, -6.262724),
+            zoom: 14,
+            draggable: false,
+            fullscreenControl: true,
+            fullscreenControlOptions: {position : google.maps.ControlPosition.BOTTOM_LEFT,},
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(mapDiv, mapOptions);
+        //loop through json file and place markers
+        $.getJSON("/static/data/markersJSON.json", function(json) {
+            $.each(json, function(key, data) {
+                //get lat and lng of station
+                var latLng = new google.maps.LatLng(data.latitude, data.longitude);  
+                //create marker and set its position 
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    icon: "/static/images/bike.png",
+                    title: data.address
+                });
+                //station info window (TO DO: content)
+                var infowindow = new google.maps.InfoWindow({
+                    content: data.address,
+                    maxWidth: 200
+                });
+                //display info window when marker is clicked
+                google.maps.event.addListener(marker, 'click', function() {
+                    //source: stackoverflow.com/questions/15111555/google-maps-api-v3-one-infowindow-open-at-a-time
+                    if($('.gm-style-iw').length) {
+                        $('.gm-style-iw').parent().remove();
+                    }
+                    infowindow.open(map, marker);
+                });
+                marker.setMap(map);
+                //create circle (TO DO: depending on availability at time of click set radius and color of circle)
+                var stationCircleOptions = {
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    clickable:true, 
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.35,
+                    center: latLng,
+                    radius: 50
+                }
+                var drawStationCircle = new google.maps.Circle(stationCircleOptions);
+                drawStationCircle.setMap(map);
+            });
+        });
+    });
+</script>   
+</body>
+</html>
+</html>
