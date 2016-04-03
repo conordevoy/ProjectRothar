@@ -2,8 +2,10 @@
 Repo holding code for our Dublin Bikes Software Development project
 
 ## Run App
+#### In terminal:
+1. Activate venv:
 
-1. Activate venv (in terminal source venv/bin/activate)
+    source venv/bin/activate
 
 2. Execute:
 
