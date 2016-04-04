@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>OpenWeatherMaps Assign 2</title>   
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<!-- SUPPORT FOR IE6-8 OF HTML5 ELEMENTS -->
+<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<title>Project Rothar</title>   
 <style type="text/css">
     html { 
         height: 100% 
@@ -13,6 +18,17 @@
         margin: 0; 
         padding: 0 
     }
+    header {
+        position:fixed;
+        float:left;
+        z-index:2;
+        width:99.1%;
+        height:110px;
+        border-bottom-left-radius:5px;
+        border-bottom-right-radius:5px;
+        background:#2b323b;
+        top:0;
+    }
     #map_canvas { 
         height: 100% 
     }
@@ -21,6 +37,18 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>    
 </head>
 <body>
+<div>
+    <h1>Welcome to Flask!</h1><br>
+    <h3>Stand Info:</h3>
+    {% for d in data %}
+    <strong>Address:</strong> {{ d.address }} <br>
+    <strong>Available Spaces:</strong> {{ d.available_bike_stands }} <br>
+    <strong>Available Bikes:</strong> {{ d.available_bikes }} <br>
+    <strong>Banking:</strong> {{ d.banking }} <br>
+    <strong>Time:</strong> {{ d.Scrape_Time }} <br>
+    <strong>Day:</strong> {{ d.Scrape_Day }} <br><br>
+    {% endfor %}
+</div>
 <div id="map_canvas" style="width:100%; height:100%"></div>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -29,9 +57,11 @@
         var mapOptions = {
             center: new google.maps.LatLng(53.347158, -6.262724),
             zoom: 14,
-            draggable: false,
+            draggable: true,
             fullscreenControl: true,
-            fullscreenControlOptions: {position : google.maps.ControlPosition.BOTTOM_LEFT,},
+            fullscreenControlOptions: {
+                position : google.maps.ControlPosition.BOTTOM_LEFT
+            },
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(mapDiv, mapOptions);
