@@ -12,3 +12,7 @@ source venv/bin/activate
 python3 ProjectRotharApp.py
 ```
 
+3. **Run through Browser**:
+```
+localhost:5000/
+```
