@@ -56,7 +56,7 @@ if __name__ == "__main__":
         sleep(300)
 
     df = pd.read_sql_query("SELECT * from projectRothar_DB", connDB)
-    # print(df.head())
+    print(df.head())
     dfCSV = df.to_csv('ProjectRotharDatabase.csv')
 
     connDB.close()
