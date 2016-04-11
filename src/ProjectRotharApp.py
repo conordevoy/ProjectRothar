@@ -12,7 +12,7 @@ projectRotharApp.db = "projectRothar_DB.db"
 @projectRotharApp.route("/")
 def ProjectRotharHTML():
 	'''Render html template'''
-	return render_template("ProjectRothar3.html")
+	return render_template("ProjectRothar.html")
 
 def connectDB():
 	'''Create and return a db object to interact with'''
