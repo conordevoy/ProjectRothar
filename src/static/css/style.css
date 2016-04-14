@@ -71,3 +71,49 @@ p {
     border:3px inset #ffffff;
     border-radius: 40px;
 }
+.gm-style-iw {
+    width: 350px !important;/**/
+    top: 15px !important;/**/
+    left: 0px !important;/**/
+}
+#iw-container {
+    width: 350px;
+}
+#iw-container .iw-title {
+    font-family:"Courier New", Courier, monospace;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 5px;
+    background-color: #063f46;
+    color:  #ffffff;
+}
+#iw-container .iw-content {
+    font-size: 15px;
+    font-weight: 500;
+    background-color: #084c55;
+    color:  #ffffff;
+    padding: 1px 1px 1px 10px;
+    max-height: 180px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.iw-subTitle {
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px;
+}
+ul#days li  {
+    display: inline;
+    background-color: #063f46;
+    color: #ffffff;
+    padding: 0px 10px;
+    text-decoration: none;
+}
+ul#days li:hover {
+    background-color: #ffffff;
+    color: #063f46;
+}
+ul {
+    list-style-type: none;
+    padding: 5px;
+}
