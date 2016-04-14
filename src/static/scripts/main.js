@@ -1,9 +1,26 @@
 $(document).ready(function() {
 	// Create map
 	var mapDiv = document.getElementById("map_canvas");
+	//Map style array
+	var styleArray = [
+		{stylers: [{visibility: "off" }]},
+		{featureType: "water", elementType: "geometry", stylers: [{visibility: "on" }, {color: "#808080"}, {lightness: 17}]},
+		{featureType: "landscape", elementType: "geometry", stylers: [{visibility: "on"}, {color: "#042a2f" }, {lightness: 20}]},
+		{featureType: "landscape", elementType: "labels.text.stroke", stylers: [{visibility: "on"}, {color: "#ffffff"}, {lightness: 16}]},
+		{featureType: "road.highway", elementType: "geometry.fill", stylers: [{visibility: "on"}, {color: "#4DBBE9"}, {lightness: 17}]},
+		{featureType: "road.highway", elementType: "labels.text.fill", stylers: [{visibility: "on"}, {saturation: 36}, {color : "#000000"}, {lightness : 16}]},
+		{featureType: "road.highway", elementType: "labels.icon", stylers: [{visibility: "on"}]},
+		{featureType: "road.arterial", elementType: "geometry", stylers: [{visibility: "on"}, {color : "#000000"}, {lightness : 16}]},
+		{featureType: "road.arterial", elementType: "labels.text", stylers: [{visibility: "on"}, {color: "#000000"}, {lightness: 16}]},
+		{featureType: "road.arterial", elementType: "labels.text.fill", stylers: [{saturation: 36}, {color : "#808080"}, {lightness : 40}]},
+		{featureType: "road.local", elementType: "geometry.stroke", stylers: [{visibility: "on"}, {color: "#000000"}, {lightness: 17}]},
+		{featureType: "administrative.locality", elementType: "labels.text", stylers: [{visibility: "on"}, {color: "#000000"}, {lightness: 16}]},
+		{featureType: "administrative.locality", elementType: "labels.text.fill", stylers: [{visibility: "on"}, {color: "#808080"}, {lightness: 40}]}
+		];
 	var mapOptions = {
 		center: new google.maps.LatLng(53.347158, -6.262724), // Center map over Dublin
 		zoom: 14,
+		styles: styleArray,
 		draggable: true,
 		fullscreenControl: true,
 		fullscreenControlOptions: {
