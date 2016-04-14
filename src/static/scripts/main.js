@@ -17,6 +17,33 @@ $(document).ready(function() {
 				closest = i;
 			}
 		}
+		// Render directions
+		var directionsService = new google.maps.DirectionsService();
+		var directionsDisplay = new google.maps.DirectionsRenderer({
+			preserveViewport: true,
+			polylineOptions:{ 
+				strokeColor:"#ffffff",
+				strokeWeight: 5
+			} 
+		});
+		// Origin location
+		var originLatLng = {lat: orLat, lng: orLng};
+		// Destination location
+		var destLatLng = {lat: markersArray[closest].position.lat(), lng: markersArray[closest].position.lng()};
+		// Generate route from origin to destination (based on travel mode passed to function)
+		directionsService.route({
+			origin: new google.maps.LatLng(originLatLng), 
+			destination: new google.maps.LatLng(destLatLng), 
+			travelMode: travelMethod
+		}, function(response, status) {
+			if (status === google.maps.DirectionsStatus.OK) {
+				directionsDisplay.setDirections(response);
+			} else {
+				console.log("Request failed: " + status);
+			}
+		});
+		// Display route on map	
+		directionsDisplay.setMap(map);	
 	};
 	// Create map
 	var mapDiv = document.getElementById("map_canvas");
