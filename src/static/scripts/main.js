@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	// Function finds closest station to a lat and lng from an array of stations with available bikes and plots route to that station based on the travel mode used
 	var locateAndRoute = function (markersArray, curLat, curLng, orLat, orLng, travelMethod, map) {
 		// Find which station with bikes or spaces available (depends on marker array passed) is closest to lat: curLat, lng: curLng
 		var distances = [];
@@ -43,11 +44,12 @@ $(document).ready(function() {
 			}
 		});
 		// Display route on map	
-		directionsDisplay.setMap(map);	
+		directionsDisplay.setMap(map);
 	};
+
 	// Create map
 	var mapDiv = document.getElementById("map_canvas");
-	//Map style array
+	// Map style array
 	var styleArray = [
 		{stylers: [{visibility: "off" }]},
 		{featureType: "water", elementType: "geometry", stylers: [{visibility: "on" }, {color: "#808080"}, {lightness: 17}]},
@@ -206,6 +208,7 @@ $(document).ready(function() {
 			drawStationCircle.setMap(map);
 			// End of loop
 		});
+
 		// Geolocation (source: https://developers.google.com/maps/documentation/javascript/examples/map-geolocation)
 		// Declare users current location variables
 		var userLat;
@@ -241,5 +244,23 @@ $(document).ready(function() {
 			// Browser has geolocation conditional
 			marker.setContent(browserHasGeolocation ? "Error: geolocation service failed." : "Error: browser doesn\'t support geolocation.");
 		}
+
+		// Get directions to closest station to destination with available spaces
+		var geocoder = new google.maps.Geocoder();
+		document.getElementById("geocode").addEventListener("click", function() {
+			// Retrieve destionation input value and use it to get lat and lng of destination.
+			var dest = document.getElementById("destionation").value;
+			// Add Dublin to input so geocoder chooses correct address
+			geocoder.geocode({"address": dest + ", Dublin"}, function(results, status) {
+				if (status === google.maps.GeocoderStatus.OK) {
+					var destLat = results[0].geometry.location.lat();
+					var destLng = results[0].geometry.location.lng();
+					// Locate and route to nearest station to destination with available spaces (assumed travel mode cycling because user will be using bike to get to destination).
+					locateAndRoute (markersAvalSpaces, destLat, destLng, userLat, userLng, google.maps.TravelMode.BICYCLING, map);
+				} else {
+					window.alert("Geocode was not successful for the following reason: " + status);
+				}
+			});
+		});
 	});
 });
