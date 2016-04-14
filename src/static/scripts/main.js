@@ -160,5 +160,40 @@ $(document).ready(function() {
 			drawStationCircle.setMap(map);
 			// End of loop
 		});
+		// Geolocation (source: https://developers.google.com/maps/documentation/javascript/examples/map-geolocation)
+		// Declare users current location variables
+		var userLat;
+		var userLng;
+		// Try HTML5 geolocation
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				userLat = position.coords.latitude;
+				userLng = position.coords.longitude;
+				var geoLoc = {lat: userLat, lng: userLng};
+				// User's location marker
+				var marker = new google.maps.Marker({
+					position: geoLoc,
+					icon: "/static/images/person.png",
+					title: "Current Location",
+				});
+				// Pass marker to map
+				marker.setMap(map);
+				// Locate and route to nearest station to user with available bikes (assumed travel mode walking because if user is looking for a bike).
+				document.getElementById("locateNearestStation").addEventListener("click", function() {
+					locateAndRoute (markersAvalBikes, userLat, userLng, userLat, userLng, google.maps.TravelMode.WALKING, map);
+				});
+			}, function() {
+				handleLocationError(true, marker, map.getCenter());
+			});
+		} else { 
+			// Browser doesn't support geolocation
+			handleLocationError(false, marker, map.getCenter());
+		}
+		// Function to handle geolocation error
+		function handleLocationError(browserHasGeolocation, marker, geoLoc) {
+			marker.setPosition(geoLoc);
+			// Browser has geolocation conditional
+			marker.setContent(browserHasGeolocation ? "Error: geolocation service failed." : "Error: browser doesn\'t support geolocation.");
+		}
 	});
 });
