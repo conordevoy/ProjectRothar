@@ -1,4 +1,23 @@
 $(document).ready(function() {
+	var locateAndRoute = function (markersArray, curLat, curLng, orLat, orLng, travelMethod, map) {
+		// Find which station with bikes or spaces available (depends on marker array passed) is closest to lat: curLat, lng: curLng
+		var distances = [];
+		var closest = -1;
+		// Loop through station array and find closest station.
+		for (i = 0; i < markersArray.length; i++) {
+			// Station lat and lng.
+			var markerLatLng = new google.maps.LatLng(markersArray[i].position.lat(), markersArray[i].position.lng());
+			// Current/destination lat and lng.
+			var currentLatLng = new google.maps.LatLng(curLat, curLng);
+			// Calculate and add distance between two points to array.
+			var d = google.maps.geometry.spherical.computeDistanceBetween(markerLatLng, currentLatLng);
+			distances[i] = d;
+			// Reassign closest station index if condition met.
+			if (closest == -1 || d < distances[closest]) {
+				closest = i;
+			}
+		}
+	};
 	// Create map
 	var mapDiv = document.getElementById("map_canvas");
 	//Map style array
