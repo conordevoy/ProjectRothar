@@ -11,12 +11,13 @@ header {
     position:fixed;
     float:left;
     z-index:2;
+    background-image: -webkit-linear-gradient(top,#063f46,#191919);
+    background-repeat: no-repeat;
     width:99%;
     height:100px;
     border-bottom-left-radius:5px;
     border-bottom-right-radius:5px;
     border:1px outset #ffffff;
-    background:#084c55;
     top:0;
 }
 footer {
@@ -25,7 +26,9 @@ footer {
     border-top-left-radius:5px;
     border-top-right-radius:5px;
     border:1px outset #ffffff;
-    background:#084c55;
+    background-image: -webkit-linear-gradient(top,#063f46,#191919);
+    background-repeat: no-repeat;
+/*    background:#084c55;*/
     bottom:0;
 }
 h1 {
@@ -127,6 +130,10 @@ p {
     background-color: #063f46;
     color:  #ffffff;
 }
+.iw-title {
+    background-image: -webkit-linear-gradient(top,#063f46,#191919);
+    background-repeat: no-repeat;
+}
 #iw-container .iw-content {
     font-size: 15px;
     font-weight: 500;
@@ -142,6 +149,9 @@ p {
     font-weight: 500;
     padding: 5px;
 }
+#days {
+    margin-top: 0px;
+}
 ul#days li  {
     display: inline;
     background-color: #063f46;
@@ -156,12 +166,14 @@ ul#days li:hover {
 ul {
     list-style-type: none;
     padding: 5px;
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
 .js-plotly-plot {
     border:3px inset #ffffff;
 }
 #divider1{
-    width:180px;
+    width:5px;
     height:auto;
     display:inline-block;
 }

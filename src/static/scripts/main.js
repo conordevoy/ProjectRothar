@@ -133,6 +133,7 @@ $(document).ready(function() {
 			'<li><strong>Available Spaces</strong><br>' + eval(JSON.stringify(data.available_bike_stands)) + '</li><br>' +
 			'<li><strong>Card Machine</strong><br>' + banking + '</li><br>' +
 			'<li><strong>Last Updated</strong><br>' + time + '</li><br>' +
+            '<li><strong>Historical Plot:</strong></li>' +
 			'</ul>' +
 			'<ul id=days>'+
 			'<li onclick="graphChart(this.id, this.textContent || this.innerText)" id="'+data.number+'" value="Mon">Mon</li>'+
